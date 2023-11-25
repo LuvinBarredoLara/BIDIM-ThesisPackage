@@ -1,4 +1,4 @@
-# BIDIM-ThesisPackage
+# BIDIM_Thesis
 
 ## Synopsis
 
