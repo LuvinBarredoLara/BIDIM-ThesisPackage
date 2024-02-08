@@ -1,0 +1,114 @@
+<div class="container-fluid">
+  <nav class="navbar navbar-expand-lg navbar-light mt-3" id="filterNavbar">
+    <div class="container-fluid">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarToggle"
+        aria-controls="navbarToggle"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse mt-2 mt-lg-0" id="navbarToggle">
+        <span class="navbar-brand mb-0 h1 me-auto" style="font-weight: bolder"
+          >Mapping Data</span
+        >
+        <form class="d-flex mt-2 mt-lg-0" [formGroup]="MappingPageFilterForm">
+          <select
+            class="form-select me-2"
+            aria-label="Select City/Municipality"
+            name="mappingPageCityMunSelect"
+            [formControl]="MappingPageFFControls.CityMunFilter"
+            (change)="FilterBrgyByCityMun($event)"
+          >
+            <option *ngFor="let cm of CityMuns" value="{{ cm.citymunCode }}">
+              {{ cm.citymunDesc }}
+            </option>
+          </select>
+          <select
+            class="form-select me-2"
+            aria-label="Select Brgy."
+            name="mappingPageBrgySelect"
+            [formControl]="MappingPageFFControls.BrgyFilter"
+            (change)="ApplyFilter()"
+          >
+            <option *ngFor="let b of Brgys" value="{{ b.brgyCode }}">
+              {{ b.brgyDesc }}
+            </option>
+          </select>
+          <div class="input-group me-2">
+            <input
+              type="text"
+              class="form-control"
+              matInput
+              [matDatepicker]="dateFrompicker"
+              [formControl]="MappingPageFFControls.DateFrom"
+              (dateChange)="ApplyFilter()"
+              readonly="true"
+              placeholder="Date From"
+            />
+            <button
+              class="btn btn-outline-secondary rounded-end"
+              type="button"
+              (click)="dateFrompicker.open()"
+            >
+              <span class="bi bi-calendar-date"></span>
+            </button>
+            <mat-datepicker
+              #dateFrompicker
+              touchUi
+              disabled="false"
+            ></mat-datepicker>
+          </div>
+          <div class="input-group me-2">
+            <input
+              type="text"
+              class="form-control"
+              matInput
+              [matDatepicker]="dateTopicker"
+              [formControl]="MappingPageFFControls.DateTo"
+              readonly="true"
+              [min]="DateToMinDate"
+              placeholder="Date To"
+              (dateChange)="ApplyFilter()"
+            />
+            <button
+              class="btn btn-outline-secondary rounded-end"
+              type="button"
+              (click)="dateTopicker.open()"
+            >
+              <span class="bi bi-calendar-date"></span>
+            </button>
+            <mat-datepicker
+              #dateTopicker
+              touchUi
+              disabled="false"
+            ></mat-datepicker>
+          </div>
+          <select
+            class="form-select text-uppercase"
+            aria-label="Select Disease"
+            [formControl]="MappingPageFFControls.DiseaseFilter"
+            (change)="ApplyFilter()"
+            style="width: auto; font-weight: bold"
+          >
+            <option
+              *ngFor="let d of Diseases"
+              value="{{ d.Id }}"
+              style="font-weight: bold"
+            >
+              {{ d.Name }}
+            </option>
+          </select>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <br />
+  <div class="container">
+    <div id="map" class="map"></div>
+  </div>
+</div>

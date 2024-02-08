@@ -1,0 +1,102 @@
+<button
+  class="btn btn-light float-end"
+  id="patientModalCloseBtn"
+  (click)="CloseModal()"
+>
+  <i class="bi bi-x-lg"></i>
+</button>
+<h2 mat-dialog-title class="text-center">
+  {{
+    cmParams.cmId === 0 && cmParams.cmTempId === 0
+      ? "ADD MONITORING"
+      : "EDIT MONITORING"
+  }}
+</h2>
+<mat-dialog-content class="mat-typography">
+  <h3 class="fw-bold">MONITORING INFORMATION</h3>
+  <mat-divider></mat-divider>
+  <br />
+  <form class="row g-3 mb-2" [formGroup]="CaseMonitoringForm">
+    <!-- Status Dropdown -->
+    <div class="col-md-8">
+      <label for="statusSelect" class="form-label fw-bold">Select Status</label>
+      <select
+        class="form-select"
+        aria-label="Select Status"
+        name="statusSelect"
+        [formControl]="CMControls.Status"
+      >
+        <option value="">Please Select</option>
+        <option value="Infected">Infected</option>
+        <option value="Recovered">Recovered</option>
+        <option value="Asymptomatic">Asymptomatic</option>
+        <option value="Mild">Mild</option>
+        <option value="Severe">Severe</option>
+        <option value="Critical">Critical</option>
+        <option value="Deceased">Deceased</option>
+      </select>
+      <div
+        *ngIf="
+          CMControls.Status.invalid &&
+          (CMControls.Status.dirty ||
+            CMControls.Status.touched ||
+            CMFormSubmitted)
+        "
+        class="font-weight-bold text-danger text-uppercase mt-2"
+      >
+        <div *ngIf="CMControls.Status.errors?.['required']">Required</div>
+      </div>
+    </div>
+
+    <!-- Created Date -->
+    <div class="col-md-4">
+      <label for="dateRecorded" class="form-label fw-bold">Date Recorded</label>
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          matInput
+          [matDatepicker]="picker"
+          [formControl]="CMControls.CreatedDate"
+          readonly="true"
+        />
+        <button
+          class="btn btn-outline-secondary rounded-end"
+          type="button"
+          id="dateRecorded"
+          (click)="picker.open()"
+        >
+          <span class="bi bi-calendar-date"></span>
+        </button>
+        <mat-datepicker #picker touchUi disabled="false"></mat-datepicker>
+      </div>
+    </div>
+
+    <!-- Symptoms -->
+    <div class="col-12">
+      <label for="symptoms" class="form-label fw-bold">Symptoms</label>
+      <textarea
+        class="form-control"
+        id="symptoms"
+        rows="3"
+        [formControl]="CMControls.Symptoms"
+      ></textarea>
+    </div>
+
+    <!-- Remarks -->
+    <div class="col-12">
+      <label for="remarks" class="form-label fw-bold">Remarks</label>
+      <textarea
+        class="form-control"
+        id="remarks"
+        rows="3"
+        [formControl]="CMControls.Remarks"
+      ></textarea>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button class="btn btn-success" type="submit" (click)="Submit$()">
+    {{ cmParams.cmId === 0 && cmParams.cmTempId === 0 ? "Create" : "Save" }}
+  </button>
+</mat-dialog-actions>

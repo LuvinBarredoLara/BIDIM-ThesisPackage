@@ -1,0 +1,239 @@
+<button
+  class="btn btn-light float-end"
+  id="patientModalCloseBtn"
+  (click)="CloseModal()"
+  [disabled]="IsLoading"
+>
+  <i class="bi bi-x-lg"></i>
+</button>
+<h2 mat-dialog-title class="text-center">
+  {{
+    CaseInfo.Guid === "00000000-0000-0000-0000-000000000000"
+      ? "ADD CASE"
+      : "EDIT CASE"
+  }}
+</h2>
+<mat-dialog-content class="mat-typography">
+  <h3 class="fw-bold">CASE INFORMATION</h3>
+  <mat-divider></mat-divider>
+  <br />
+  <form class="row g-3 mb-2" [formGroup]="CaseForm">
+    <!-- Id -->
+    <div class="col-md-6">
+      <label for="caseId" class="form-label fw-bold">Case ID</label>
+      <input
+        type="text"
+        class="form-control"
+        id="caseId"
+        [formControl]="CaseControls.Id"
+        [hidden]="IsLoading"
+      />
+      <div
+        *ngIf="
+          CaseControls.Id.invalid &&
+          (CaseControls.Id.dirty ||
+            CaseControls.Id.touched ||
+            CaseFormSubmitted)
+        "
+        class="font-weight-bold text-danger text-uppercase mt-2"
+      >
+        <div *ngIf="CaseControls.Id.errors?.['required']">Required</div>
+      </div>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+
+    <!-- Outcome -->
+    <div class="col-md-3">
+      <label for="outcome" class="form-label fw-bold">Outcome</label>
+      <input
+        type="text"
+        class="form-control"
+        id="outcome"
+        [formControl]="CaseControls.Outcome"
+        [hidden]="IsLoading"
+        style="font-weight: bolder"
+        readonly
+      />
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+
+    <!-- Outcome Date -->
+    <div class="col-md-3">
+      <label for="outcomeDate" class="form-label fw-bold">Outcome Date</label>
+      <input
+        type="text"
+        class="form-control"
+        id="outcomeDate"
+        [formControl]="CaseControls.OutcomeDate"
+        [hidden]="IsLoading"
+        style="font-weight: bolder"
+        readonly
+      />
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+
+    <!-- Individual Autocomplete -->
+    <div class="col-12">
+      <label for="individualdropdown" class="form-label fw-bold"
+        >Individual | Household</label
+      >
+      <input
+        type="text"
+        placeholder="Search Individual/Household"
+        class="form-control"
+        [formControl]="CaseControls.Individual"
+        [matAutocomplete]="auto"
+        [hidden]="IsLoading"
+      />
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option
+          *ngFor="let i of filteredIndividuals | async | slice : 0 : 10"
+          [value]="i.FullNameHousehold"
+          >{{ i.FullNameHousehold }}</mat-option
+        >
+      </mat-autocomplete>
+      <div
+        *ngIf="
+          CaseControls.Individual.invalid &&
+          (CaseControls.Individual.dirty ||
+            CaseControls.Individual.touched ||
+            CaseFormSubmitted)
+        "
+        class="font-weight-bold text-danger text-uppercase mt-2"
+      >
+        <div *ngIf="CaseControls.Individual.errors?.['required']">Required</div>
+      </div>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+
+    <!-- Infectious Disease Dropdown -->
+    <div class="col-md-6">
+      <label for="diseaseSelect" class="form-label fw-bold"
+        >Select Disease</label
+      >
+      <select
+        class="form-select"
+        aria-label="Select Disease"
+        name="diseaseSelect"
+        [formControl]="CaseControls.InfectiousDisease"
+        [hidden]="IsLoading"
+      >
+        <option selected value="0">Please Select</option>
+        <option *ngFor="let d of Diseases" value="{{ d.Id }}">
+          {{ d.Name }}
+        </option>
+      </select>
+      <div
+        *ngIf="
+          CaseControls.InfectiousDisease.dirty ||
+          CaseControls.InfectiousDisease.touched ||
+          CaseFormSubmitted
+        "
+        class="font-weight-bold text-danger text-uppercase mt-2"
+      >
+        <div *ngIf="CaseControls.InfectiousDisease.errors?.['min']">
+          Required
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <!-- Case Monitorings List -->
+  <br />
+  <h3 class="fw-bold">CASE MONITORINGS</h3>
+  <mat-divider></mat-divider>
+  <button
+    class="btn btn-success me-auto mb-2 mt-2 float-end"
+    type="button"
+    style="color: #ffffff"
+    (click)="AddCaseMonitoring()"
+  >
+    <i class="bi bi-plus-circle"></i>
+    New Monitoring
+  </button>
+  <br />
+  <!-- Case Monitorings Table -->
+  <table mat-table [dataSource]="CaseMonitoringList">
+    <ng-container matColumnDef="Status">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let cm">{{ cm.Status }}</td>
+    </ng-container>
+    <ng-container matColumnDef="CreatedDate">
+      <th mat-header-cell *matHeaderCellDef>Created Date</th>
+      <td mat-cell *matCellDef="let cm">{{ cm.CreatedDate }}</td>
+    </ng-container>
+    <ng-container matColumnDef="Options">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let cm">
+        <button
+          class="btn btn-md btn-warning text-white me-3"
+          (click)="EditCaseMonitoring(cm.Id, cm.TempId)"
+        >
+          <i class="bi bi-pencil-fill"></i>
+        </button>
+      </td>
+    </ng-container>
+    <!-- Table Body -->
+    <tr mat-header-row *matHeaderRowDef="CaseMonitoringColumnHeaders"></tr>
+    <tr
+      mat-row
+      *matRowDef="
+        let caseMonitoringRowData;
+        columns: CaseMonitoringColumnHeaders
+      "
+    ></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="5" [hidden]="!IsLoading">
+        <ngx-skeleton-loader
+          class="mt-2"
+          count="2"
+          appearance="line"
+          animation="pulse"
+          [theme]="{ height: '40px' }"
+        ></ngx-skeleton-loader>
+      </td>
+      <td
+        class="mat-cell"
+        colspan="6"
+        style="text-align: center"
+        [hidden]="IsLoading"
+      >
+        No data
+      </td>
+    </tr>
+  </table>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button
+    class="btn btn-success"
+    type="submit"
+    [disabled]="IsLoading"
+    (click)="Submit$()"
+  >
+    {{ caseId !== "00000000-0000-0000-0000-000000000000" ? "Save" : "Create" }}
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,158 @@
+<div class="container-fluid">
+  <nav class="navbar navbar-expand-lg navbar-light mt-3" id="searchNavbar">
+    <div class="container-fluid">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarToggle"
+        aria-controls="navbarToggle"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse mt-2 mt-lg-0" id="navbarToggle">
+        <span class="navbar-brand mb-0 h1 me-auto" style="font-weight: bolder"
+          >Patient List</span
+        >
+        <form class="d-flex mt-2 mt-lg-0">
+          <button
+            class="btn btn-outline-primary me-2"
+            [hidden]="
+              UserPrincipal.Type === 'User' || UserPrincipal.Type === 'Guest'
+            "
+          >
+            Generate
+          </button>
+          <select
+            class="form-select me-2"
+            aria-label="Select Disease"
+            [(ngModel)]="DiseaseFilter"
+            (change)="applyFilter($event)"
+            name="diseaseFilterSelect"
+          >
+            <option selected value="">All</option>
+            <option value="Tuberculosis">Tuberculosis</option>
+            <option value="Dengue">Dengue</option>
+            <option value="Covid">Covid</option>
+          </select>
+          <input
+            class="form-control me-2"
+            type="text"
+            placeholder="Search..."
+            aria-label="Search"
+            [(ngModel)]="SearchFilter"
+            (keyup)="applyFilter($event)"
+            name="searchFilter"
+          />
+        </form>
+      </div>
+    </div>
+  </nav>
+  <br />
+  <button
+    class="btn btn-warning me-auto mb-3"
+    type="button"
+    style="color: #ffffff; font-weight: bolder"
+    (click)="AddPatient()"
+  >
+    <i class="bi bi-person-plus-fill"></i>
+    ADD NEW PATIENT
+  </button>
+  <table mat-table [dataSource]="PatientList" matSort>
+    <ng-container matColumnDef="PatientId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Patient ID</th>
+      <td mat-cell *matCellDef="let patient">{{ patient.PatientId }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="FullName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Full Name</th>
+      <td mat-cell *matCellDef="let patient">{{ patient.FullName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Disease">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Disease</th>
+      <td mat-cell *matCellDef="let patient">{{ patient.Disease }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="ContactNumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Contact No.</th>
+      <td mat-cell *matCellDef="let patient">{{ patient.ContactNumber }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="AdmissionDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Date of Admission
+      </th>
+      <td mat-cell *matCellDef="let patient">{{ patient.AdmissionDate }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Options">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let patient">
+        <button
+          class="btn btn-md btn-info text-white me-3"
+          (click)="EditPatient(patient.PatientGuid, patient.RecordId, true)"
+        >
+          <i class="bi bi-eye-fill"></i>
+        </button>
+        <button
+          class="btn btn-md btn-warning text-white me-3"
+          (click)="EditPatient(patient.PatientGuid, patient.RecordId, false)"
+        >
+          <i class="bi bi-pencil-fill"></i>
+        </button>
+        <button
+          class="btn btn-md btn-danger"
+          (click)="DeletePatient(patient.PatientGuid)"
+        >
+          <i class="bi bi-trash-fill"></i>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="PatientColumnHeaders"></tr>
+    <tr
+      mat-row
+      *matRowDef="let patientRowData; columns: PatientColumnHeaders"
+    ></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="5" [hidden]="!IsLoading">
+        <ngx-skeleton-loader
+          class="mt-1"
+          count="2"
+          appearance="line"
+          animation="pulse"
+          [theme]="{ height: '40px' }"
+        ></ngx-skeleton-loader>
+      </td>
+      <td
+        class="mat-cell"
+        colspan="6"
+        style="text-align: center"
+        [hidden]="IsLoading"
+      >
+        No data matching filters:
+        {{
+          DiseaseFilter.length === 0
+            ? "`" + SearchFilter + "`"
+            : "`" +
+              DiseaseFilter +
+              "`" +
+              (SearchFilter.length === 0
+                ? ""
+                : " with keywords " + "`" + SearchFilter + "`")
+        }}
+      </td>
+    </tr>
+  </table>
+  <mat-paginator
+    [pageSize]="10"
+    [hidePageSize]="true"
+    [length]="PatientList.data.length"
+    [showFirstLastButtons]
+    aria-label="Select page of patients"
+  >
+  </mat-paginator>
+</div>

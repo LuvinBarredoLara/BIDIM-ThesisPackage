@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>SELECT MAPPING</h2>
+<mat-dialog-content class="mat-typography">
+  <div id="map" class="map"></div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button class="btn btn-info me-2 text-white" (click)="CloseMapping$(true)">
+    Cancel
+  </button>
+  <button
+    class="btn btn-success me-2 text-white"
+    (click)="CloseMapping$(false)"
+  >
+    Confirm
+  </button>
+</mat-dialog-actions>

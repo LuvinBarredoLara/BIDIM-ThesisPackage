@@ -1,0 +1,16 @@
+table {
+  width: 100%;
+  /* background-color: #d9d9d9; */
+  /* border-radius: 10px; */
+  vertical-align: middle;
+  /* border-color: #888888; */
+}
+
+[class*="mat-column"] {
+  text-align: center;
+}
+
+:host ::ng-deep .mat-sort-header-container {
+  display: flex;
+  justify-content: center;
+}

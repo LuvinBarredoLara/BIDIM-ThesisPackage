@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "BIDIM.DAL.Dev": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

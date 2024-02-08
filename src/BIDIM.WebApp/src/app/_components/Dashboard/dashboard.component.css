@@ -1,0 +1,108 @@
+#dropdownBtn {
+  width: max-content;
+  background-color: #20df7f;
+  border-color: #20df7f;
+  border-radius: 20px;
+}
+
+.card {
+  color: rgb(255, 255, 255);
+  background-color: rgb(255, 255, 255, 0.1);
+  border-radius: 20px;
+  height: 200px;
+  overflow: hidden;
+}
+
+.cardBG1 {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.01) 0%,
+    rgba(255, 255, 255, 0.01) 70%,
+    rgba(142, 99, 238, 1) 100%
+  );
+}
+
+.cardBG2 {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.01) 0%,
+    rgba(255, 255, 255, 0.01) 70%,
+    rgba(226, 226, 41, 1) 100%
+  );
+}
+
+.cardBG3 {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.01) 0%,
+    rgba(255, 255, 255, 0.01) 70%,
+    rgba(255, 98, 82, 1) 100%
+  );
+}
+
+.cardBG4 {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.01) 0%,
+    rgba(255, 255, 255, 0.01) 70%,
+    rgba(42, 198, 112, 1) 100%
+  );
+}
+
+.cardBG5 {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.01) 0%,
+    rgba(255, 255, 255, 0.01) 70%,
+    rgba(58, 235, 71, 1) 100%
+  );
+}
+
+.card-text {
+  opacity: 0.5;
+}
+
+@media only screen and (min-width: 768px) {
+  /* For desktop: */
+  .col-1 {
+    width: 8.33%;
+  }
+  .col-2 {
+    width: 16.66%;
+  }
+  .col-3 {
+    width: 25%;
+  }
+  .col-4 {
+    width: 33.33%;
+  }
+  .col-5 {
+    width: 41.66%;
+  }
+  .col-6 {
+    width: 50%;
+  }
+  .col-7 {
+    width: 58.33%;
+  }
+  .col-8 {
+    width: 66.66%;
+  }
+  .col-9 {
+    width: 75%;
+  }
+  .col-10 {
+    width: 83.33%;
+  }
+  .col-11 {
+    width: 91.66%;
+  }
+  .col-12 {
+    width: 100%;
+  }
+}

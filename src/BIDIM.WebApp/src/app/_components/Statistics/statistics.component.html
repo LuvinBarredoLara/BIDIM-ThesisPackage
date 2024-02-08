@@ -1,0 +1,49 @@
+<div class="container-fluid">
+  <nav class="navbar navbar-expand-lg navbar-light mt-3" id="filterNavbar">
+    <div class="container-fluid">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarToggle"
+        aria-controls="navbarToggle"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse mt-2 mt-lg-0" id="navbarToggle">
+        <span class="navbar-brand mb-0 h1 me-auto" style="font-weight: bolder"
+          >Statistics</span
+        >
+        <form class="d-flex mt-2 mt-lg-0">
+          <select
+            class="form-select me-2 text-uppercase"
+            aria-label="Select Disease"
+            [(ngModel)]="SelectedDiseaseId"
+            name="diseaseFilterSelect"
+            style="width: auto"
+            (change)="LoadData$()"
+            style="width: auto; font-weight: bold"
+          >
+            <option
+              *ngFor="let d of Diseases"
+              value="{{ d.Id }}"
+              style="font-weight: bold"
+            >
+              {{ d.Name }}
+            </option>
+          </select>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <br />
+  <div class="container">
+    <p class="lead text-white text-center">
+      Infection Rate: <b>{{ StatisticsData.InfectionRate }}%</b> | Recovery
+      Rate: <b>{{ StatisticsData.RecoveryRate }}%</b>
+    </p>
+    <canvas id="statisticsChart"></canvas>
+  </div>
+</div>

@@ -1,0 +1,234 @@
+<button
+  class="btn btn-light float-end"
+  id="patientModalCloseBtn"
+  (click)="CloseModal()"
+  [disabled]="IsLoading"
+>
+  <i class="bi bi-x-lg"></i>
+</button>
+<h2 mat-dialog-title class="text-center">{{ UserModalTitle }}</h2>
+<mat-dialog-content class="mat-typography">
+  <h3 class="fw-bold">USER INFORMATION</h3>
+  <mat-divider></mat-divider>
+  <br />
+  <form class="row g-3" [formGroup]="UserForm">
+    <div class="col-md-4">
+      <label for="username" class="form-label fw-bold">Username</label>
+      <input
+        type="text"
+        class="form-control"
+        id="username"
+        [formControl]="UserFormControls.Username"
+        [hidden]="IsLoading"
+      />
+      <div
+        *ngIf="
+          UserFormControls.Username.invalid &&
+          (UserFormControls.Username.dirty ||
+            UserFormControls.Username.touched ||
+            UserFormSubmitted)
+        "
+        class="font-weight-bold text-danger text-uppercase mt-2"
+      >
+        <div *ngIf="UserFormControls.Username.errors?.['required']">
+          Required
+        </div>
+      </div>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+    <div class="col-md-4">
+      <label for="password" class="form-label fw-bold">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        [formControl]="UserFormControls.Password"
+        [hidden]="IsLoading"
+        (keyup)="SetPasswordUpdated()"
+      />
+      <div
+        *ngIf="
+          UserFormControls.Password.invalid &&
+          (UserFormControls.Password.dirty ||
+            UserFormControls.Password.touched ||
+            UserFormSubmitted)
+        "
+        class="font-weight-bold text-danger text-uppercase mt-2"
+      >
+        <div *ngIf="UserFormControls.Password.errors?.['required']">
+          Required
+        </div>
+        <div *ngIf="UserFormControls.Password.errors?.['minlength']">
+          Atleast 4 characters
+        </div>
+      </div>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+    <div class="col-md-4">
+      <label for="confirmPassword" class="form-label fw-bold"
+        >Confirm Password</label
+      >
+      <input
+        type="password"
+        class="form-control"
+        id="confirmPassword"
+        [formControl]="UserFormControls.ConfirmPassword"
+        [hidden]="IsLoading"
+      />
+      <div
+        *ngIf="
+          (UserFormControls.ConfirmPassword.invalid &&
+            (UserFormControls.ConfirmPassword.dirty ||
+              UserFormControls.ConfirmPassword.touched ||
+              UserFormSubmitted)) ||
+          UserFormControls.ConfirmPassword.value !==
+            UserFormControls.Password.value
+        "
+        class="font-weight-bold text-danger text-uppercase mt-2"
+      >
+        <div *ngIf="UserFormControls.ConfirmPassword.errors?.['required']">
+          Required
+        </div>
+        <div *ngIf="UserFormControls.ConfirmPassword.errors?.['minlength']">
+          Atleast 4 characters
+        </div>
+        <div
+          *ngIf="
+            UserFormControls.ConfirmPassword.value !==
+            UserFormControls.Password.value
+          "
+        >
+          Does not match Password
+        </div>
+      </div>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+    <div class="col-md-4">
+      <label for="firstname" class="form-label fw-bold">First Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="firstname"
+        [formControl]="UserFormControls.FirstName"
+        [hidden]="IsLoading"
+      />
+      <div
+        *ngIf="
+          UserFormControls.FirstName.invalid &&
+          (UserFormControls.FirstName.dirty ||
+            UserFormControls.FirstName.touched ||
+            UserFormSubmitted)
+        "
+        class="font-weight-bold text-danger text-uppercase mt-2"
+      >
+        <div *ngIf="UserFormControls.FirstName.errors?.['required']">
+          Required
+        </div>
+      </div>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+    <div class="col-md-4">
+      <label for="lastname" class="form-label fw-bold">Last Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="lastname"
+        [formControl]="UserFormControls.LastName"
+        [hidden]="IsLoading"
+      />
+      <div
+        *ngIf="
+          UserFormControls.LastName.invalid &&
+          (UserFormControls.LastName.dirty ||
+            UserFormControls.LastName.touched ||
+            UserFormSubmitted)
+        "
+        class="font-weight-bold text-danger text-uppercase mt-2"
+      >
+        <div *ngIf="UserFormControls.LastName.errors?.['required']">
+          Required
+        </div>
+      </div>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+    <div class="col-md-4">
+      <label for="userTypeSelect" class="form-label fw-bold">User Type</label>
+      <select
+        class="form-select"
+        aria-label="Select User Type"
+        name="userTypeSelect"
+        [formControl]="UserFormControls.UserType"
+        [hidden]="IsLoading"
+      >
+        <option *ngFor="let ut of UserTypes" value="{{ ut.Id }}">
+          {{ ut.Name }}
+        </option>
+      </select>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+    <div class="col-md-4">
+      <div class="form-check form-switch" [hidden]="IsLoading">
+        <label class="form-check-label" for="userIsActive">Active Status</label>
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="userIsActive"
+          [formControl]="UserFormControls.Status"
+        />
+      </div>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button
+    class="btn btn-success"
+    type="submit"
+    [disabled]="IsLoading"
+    (click)="Submit$()"
+  >
+    {{ userId !== "00000000-0000-0000-0000-000000000000" ? "Save" : "Create" }}
+  </button>
+</mat-dialog-actions>

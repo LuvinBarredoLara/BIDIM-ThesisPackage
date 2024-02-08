@@ -1,0 +1,205 @@
+<button
+  class="btn btn-light float-end"
+  id="householdModalCloseBtn"
+  (click)="CloseModal()"
+  [disabled]="IsLoading"
+>
+  <i class="bi bi-x-lg"></i>
+</button>
+<h2 mat-dialog-title class="text-center">
+  {{ HouseholdInfo.Id === 0 ? "ADD HOUSEHOLD" : "EDIT HOUSEHOLD" }}
+</h2>
+<mat-dialog-content class="mat-typography">
+  <h3 class="fw-bold">HOUSEHOLD INFORMATION</h3>
+  <mat-divider></mat-divider>
+  <br />
+  <form class="row g-3" [formGroup]="HouseholdForm">
+    <!-- Family Name -->
+    <div class="col-12">
+      <label for="householdFamilyName" class="form-label fw-bold"
+        >Family Name</label
+      >
+      <input
+        type="text"
+        class="form-control"
+        id="householdFamilyName"
+        [formControl]="HHControls.FamilyName"
+        [hidden]="IsLoading"
+      />
+      <div
+        *ngIf="
+          HHControls.FamilyName.invalid &&
+          (HHControls.FamilyName.dirty ||
+            HHControls.FamilyName.touched ||
+            HHFormSubmitted)
+        "
+        class="font-weight-bold text-danger text-uppercase mt-2"
+      >
+        <div *ngIf="HHControls.FamilyName.errors?.['required']">Required</div>
+      </div>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+
+    <!-- City/Mun -->
+    <div class="col-md-6">
+      <label for="householdCityMun" class="form-label fw-bold"
+        >City/Municipality</label
+      >
+      <select
+        class="form-select"
+        aria-label="Select City/Municipality"
+        (change)="FilterBrgyByCityMun($event)"
+        name="patientCityMunSelect"
+        [formControl]="HHControls.CityMun"
+        [hidden]="IsLoading"
+      >
+        <option selected value="">Please Select</option>
+        <option *ngFor="let cm of CityMuns" value="{{ cm.citymunDesc }}">
+          {{ cm.citymunDesc }}
+        </option>
+      </select>
+      <div
+        *ngIf="
+          HHControls.CityMun.invalid &&
+          (HHControls.CityMun.dirty ||
+            HHControls.CityMun.touched ||
+            HHFormSubmitted)
+        "
+        class="font-weight-bold text-danger text-uppercase mt-2"
+      >
+        <div *ngIf="HHControls.CityMun.errors?.['required']">Required</div>
+      </div>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+
+    <!-- Brgy -->
+    <div class="col-md-6">
+      <label for="householdBrgy" class="form-label fw-bold">Brgy.</label>
+      <select
+        class="form-select"
+        aria-label="Select Brgy."
+        name="patientBrgySelect"
+        [formControl]="HHControls.Brgy"
+        [hidden]="IsLoading"
+        (change)="UpdateHHCoordsEvent()"
+      >
+        <option *ngFor="let b of Brgys" value="{{ b.brgyDesc }}">
+          {{ b.brgyDesc }}
+        </option>
+      </select>
+      <div
+        *ngIf="
+          HHControls.Brgy.invalid &&
+          (HHControls.Brgy.dirty || HHControls.Brgy.touched || HHFormSubmitted)
+        "
+        class="font-weight-bold text-danger text-uppercase mt-2"
+      >
+        <div *ngIf="HHControls.Brgy.errors?.['required']">Required</div>
+      </div>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+
+    <!-- Zone -->
+    <div class="col-md-4">
+      <label for="householdZone" class="form-label fw-bold">Zone</label>
+      <input
+        type="text"
+        class="form-control"
+        id="householdZone"
+        [formControl]="HHControls.Zone"
+        [hidden]="IsLoading"
+      />
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+
+    <!-- Street -->
+    <div class="col-md-5">
+      <label for="householdStreet" class="form-label fw-bold">Street</label>
+      <input
+        type="text"
+        class="form-control"
+        id="householdStreet"
+        [formControl]="HHControls.Street"
+        [hidden]="IsLoading"
+      />
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+
+    <!-- Placeholder -->
+    <!-- <div class="col-md-6"></div> -->
+
+    <!-- Mapping Btn -->
+    <div class="col-md-3">
+      <label for="mappingBtn" class="form-label fw-bold"
+        >Household Mapping</label
+      >
+      <button
+        type="button"
+        class="btn btn-primary form-control"
+        name="mappingBtn"
+        (click)="OpenMapping()"
+        [disabled]="IsLoading"
+      >
+        <i class="bi bi-geo-alt"></i> Open Map
+      </button>
+      <div class="mt-2">
+        <p
+          style="font-weight: bold; text-transform: uppercase"
+          [ngClass]="
+            HouseholdCoordinates.length === 0
+              ? 'text-danger float-end'
+              : 'text-success float-end'
+          "
+        >
+          {{
+            HouseholdCoordinates.length === 0
+              ? "No Location"
+              : "Location Selected"
+          }}
+          <i
+            [ngClass]="
+              HouseholdCoordinates.length === 0
+                ? 'bi bi-exclamation-circle text-danger'
+                : 'bi bi-check-circle text-success'
+            "
+          ></i>
+        </p>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button class="btn btn-success" [disabled]="IsLoading" (click)="Submit$()">
+    {{ data.householdId != 0 ? "Save" : "Create" }}
+  </button>
+</mat-dialog-actions>

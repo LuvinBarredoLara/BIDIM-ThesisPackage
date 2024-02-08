@@ -1,0 +1,291 @@
+<button
+  class="btn btn-light float-end"
+  id="patientModalCloseBtn"
+  (click)="CloseModal()"
+  [disabled]="IsLoading"
+>
+  <i class="bi bi-x-lg"></i>
+</button>
+<h2 mat-dialog-title class="text-center">
+  {{
+    IndividualInfo.Id === "00000000-0000-0000-0000-000000000000"
+      ? "ADD INDIVIDUAL"
+      : "EDIT INDIVIDUAL"
+  }}
+</h2>
+<mat-dialog-content class="mat-typography">
+  <h3 class="fw-bold">INDIVIDUAL INFORMATION</h3>
+  <mat-divider></mat-divider>
+  <br />
+  <form class="row g-3 mb-2" [formGroup]="IndividualForm">
+    <!-- First Name -->
+    <div class="col-md-6">
+      <label for="firstname" class="form-label fw-bold">First Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="firstname"
+        [formControl]="IndControls.FirstName"
+        [hidden]="IsLoading"
+      />
+      <div
+        *ngIf="
+          IndControls.FirstName.invalid &&
+          (IndControls.FirstName.dirty ||
+            IndControls.FirstName.touched ||
+            IndFormSubmitted)
+        "
+        class="font-weight-bold text-danger text-uppercase mt-2"
+      >
+        <div *ngIf="IndControls.FirstName.errors?.['required']">Required</div>
+      </div>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+
+    <!-- Last Name -->
+    <div class="col-md-6">
+      <label for="lastname" class="form-label fw-bold">Last Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="lastname"
+        [formControl]="IndControls.LastName"
+        [hidden]="IsLoading"
+      />
+      <div
+        *ngIf="
+          IndControls.LastName.invalid &&
+          (IndControls.LastName.dirty ||
+            IndControls.LastName.touched ||
+            IndFormSubmitted)
+        "
+        class="font-weight-bold text-danger text-uppercase mt-2"
+      >
+        <div *ngIf="IndControls.LastName.errors?.['required']">Required</div>
+      </div>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+
+    <!-- DoB -->
+    <div class="col-md-4">
+      <label for="dob" class="form-label fw-bold">Date of Birth</label>
+      <div class="input-group" [hidden]="IsLoading">
+        <input
+          type="text"
+          class="form-control"
+          matInput
+          [matDatepicker]="picker"
+          [formControl]="IndControls.DoB"
+          (dateChange)="CalculateAge($event)"
+          readonly="true"
+        />
+        <button
+          class="btn btn-outline-secondary rounded-end"
+          type="button"
+          id="dob"
+          (click)="picker.open()"
+        >
+          <span class="bi bi-calendar-date"></span>
+        </button>
+        <mat-datepicker #picker touchUi disabled="false"></mat-datepicker>
+      </div>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+
+    <!-- Age -->
+    <div class="col-md-2">
+      <label for="age" class="form-label fw-bold">Age</label>
+      <input
+        type="number"
+        min="0"
+        class="form-control"
+        id="age"
+        [formControl]="IndControls.Age"
+        [hidden]="IsLoading"
+      />
+      <div
+        *ngIf="
+          IndControls.Age.invalid &&
+          (IndControls.Age.dirty || IndControls.Age.touched || IndFormSubmitted)
+        "
+        class="font-weight-bold text-danger text-uppercase mt-2"
+      >
+        <div *ngIf="IndControls.Age.errors?.['required']">Required</div>
+      </div>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+
+    <!-- Gender -->
+    <div class="col-md-3">
+      <label for="gender" class="form-label fw-bold">Gender</label>
+      <select
+        class="form-select"
+        aria-label="Select Gender"
+        [formControl]="IndControls.Gender"
+        [hidden]="IsLoading"
+        id="gender"
+      >
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+
+    <!-- Contact Number -->
+    <div class="col-md-3">
+      <label for="contactNum" class="form-label fw-bold">Contact No.</label>
+      <input
+        type="text"
+        class="form-control"
+        id="contactNum"
+        [formControl]="IndControls.ContactNumber"
+        [hidden]="IsLoading"
+      />
+      <div
+        *ngIf="
+          IndControls.ContactNumber.invalid &&
+          (IndControls.ContactNumber.dirty ||
+            IndControls.ContactNumber.touched ||
+            IndFormSubmitted)
+        "
+        class="font-weight-bold text-danger text-uppercase mt-2"
+      >
+        <div *ngIf="IndControls.ContactNumber.errors?.['required']">
+          Required
+        </div>
+      </div>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+
+    <!-- Household Autocomplete -->
+    <div class="col-12">
+      <label for="householddropdown" class="form-label fw-bold"
+        >Household</label
+      >
+      <div class="input-group" [hidden]="IsLoading">
+        <input
+          type="text"
+          placeholder="Search Household"
+          class="form-control"
+          [formControl]="SelectedHouseholdName"
+          [matAutocomplete]="auto"
+        />
+        <button
+          class="btn btn-outline-secondary rounded-end"
+          type="button"
+          id="householddropdownbtn"
+          (click)="AddHousehold()"
+        >
+          <span class="bi bi-plus-circle"></span>
+        </button>
+      </div>
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option
+          *ngFor="let hh of filteredHouseholds | async"
+          [value]="hh.FamilyName"
+          >{{ hh.FamilyName }}</mat-option
+        >
+      </mat-autocomplete>
+      <div
+        *ngIf="
+          SelectedHouseholdName.invalid &&
+          (SelectedHouseholdName.dirty ||
+            SelectedHouseholdName.touched ||
+            IndFormSubmitted)
+        "
+        class="font-weight-bold text-danger text-uppercase mt-2"
+      >
+        <div *ngIf="SelectedHouseholdName.errors?.['required']">Required</div>
+      </div>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+
+    <!-- IsActive -->
+    <div class="col-md-3">
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          value=""
+          id="isActiveCheckBox"
+          [formControl]="IndControls.IsActive"
+          (change)="UpdateByDiseaseCheckBox()"
+        />
+        <label class="form-check-label" for="isActiveCheckBox"> Active </label>
+      </div>
+    </div>
+
+    <!-- IsDeceasedByDisease -->
+    <div class="col-md-5">
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          value=""
+          id="IsDeceasedByDiseaseCheckbox"
+          [formControl]="IndControls.IsDeceasedByDisease"
+          (change)="UpdateIsActiveCheckBox()"
+        />
+        <label class="form-check-label" for="IsDeceasedByDiseaseCheckbox">
+          Deceased By Disease
+        </label>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button
+    class="btn btn-success"
+    type="submit"
+    [disabled]="IsLoading"
+    (click)="Submit$()"
+  >
+    {{
+      individualId !== "00000000-0000-0000-0000-000000000000"
+        ? "Save"
+        : "Create"
+    }}
+  </button>
+</mat-dialog-actions>

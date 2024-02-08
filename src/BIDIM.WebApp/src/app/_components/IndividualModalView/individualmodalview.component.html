@@ -1,0 +1,135 @@
+<button
+  class="btn btn-light float-end"
+  id="individualModalViewCloseBtn"
+  [disabled]="IsLoading"
+  mat-dialog-close
+>
+  <i class="bi bi-x-lg"></i>
+</button>
+<h2 mat-dialog-title class="text-center">VIEW INDIVIDUAL</h2>
+<mat-dialog-content class="mat-typography">
+  <h3 class="fw-bold">INDIVIDUAL INFORMATION</h3>
+  <mat-divider></mat-divider>
+  <br />
+  <div class="row g-3">
+    <!-- Full Name -->
+    <div class="col-12">
+      <label class="form-label fw-bold">Full Name</label>
+      <p [hidden]="IsLoading">
+        {{ IndividualInfo.FirstName + " " + IndividualInfo.LastName }}
+      </p>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+
+    <!-- DoB -->
+    <div class="col-md-4">
+      <label class="form-label fw-bold">Date of Birth</label>
+      <p [hidden]="IsLoading">
+        {{ DoB }}
+      </p>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+
+    <!-- Age -->
+    <div class="col-md-2">
+      <label class="form-label fw-bold">Age</label>
+      <p [hidden]="IsLoading">
+        {{ IndividualInfo.Age }}
+      </p>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+
+    <!-- Gender -->
+    <div class="col-md-3">
+      <label class="form-label fw-bold">Gender</label>
+      <p [hidden]="IsLoading">
+        {{ IndividualInfo.Gender }}
+      </p>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+
+    <!-- Contact No -->
+    <div class="col-md-3">
+      <label class="form-label fw-bold">Contact No.</label>
+      <p [hidden]="IsLoading">
+        {{ IndividualInfo.ContactNumber }}
+      </p>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+
+    <!-- Household FamilyName -->
+    <div class="col-12">
+      <label class="form-label fw-bold">Household Family Name</label>
+      <p [hidden]="IsLoading">
+        {{ SelectedHousehold }}
+      </p>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+
+    <!-- IsActive -->
+    <div class="col-md-3">
+      <label class="form-label fw-bold">Active</label>
+      <p [hidden]="IsLoading">
+        {{ IndividualInfo.IsActive ? "YES" : "NO" }}
+      </p>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+
+    <!-- IsDeceasedByDisease -->
+    <div class="col-md-5">
+      <label class="form-label fw-bold">Deceased By Disease</label>
+      <p [hidden]="IsLoading">
+        {{ IndividualInfo.IsDeceasedByDisease ? "YES" : "NO" }}
+      </p>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+  </div>
+</mat-dialog-content>

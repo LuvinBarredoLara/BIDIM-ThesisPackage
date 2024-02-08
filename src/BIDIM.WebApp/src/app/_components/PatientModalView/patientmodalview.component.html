@@ -1,0 +1,166 @@
+<button
+  class="btn btn-light float-end"
+  id="patientModalViewCloseBtn"
+  [disabled]="IsLoading"
+  mat-dialog-close
+>
+  <i class="bi bi-x-lg"></i>
+</button>
+<h2 mat-dialog-title class="text-center">VIEW PATIENT</h2>
+<mat-dialog-content class="mat-typography">
+  <h3 class="fw-bold">PATIENT INFORMATION</h3>
+  <mat-divider></mat-divider>
+  <br />
+  <div class="row g-3">
+    <div class="col-md-4">
+      <label for="patientId" class="form-label fw-bold">Patient ID</label>
+      <p [hidden]="IsLoading">{{ PatientInfo.PatientId }}</p>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+    <div class="col-md-4">
+      <label for="patientFirstName" class="form-label fw-bold"
+        >First Name
+      </label>
+      <p [hidden]="IsLoading">{{ PatientInfo.FirstName }}</p>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+    <div class="col-md-4">
+      <label for="patientLastName" class="form-label fw-bold">Last Name </label>
+      <p [hidden]="IsLoading">{{ PatientInfo.LastName }}</p>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+    <div class="col-md-4">
+      <label for="patientDoB" class="form-label fw-bold">Date of Birth </label>
+      <p [hidden]="IsLoading">{{ PatientDoB }}</p>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+    <div class="col-md-2">
+      <label for="patientAge" class="form-label fw-bold">Age </label>
+      <p [hidden]="IsLoading">{{ PatientInfo.Age }}</p>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+    <div class="col-md-3">
+      <label for="patientSex" class="form-label fw-bold">Sex </label>
+      <p [hidden]="IsLoading">{{ PatientInfo.Sex }}</p>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+    <div class="col-md-3">
+      <label for="patientContactNumber" class="form-label fw-bold"
+        >Contact Number
+      </label>
+      <p [hidden]="IsLoading">{{ PatientInfo.ContactNumber }}</p>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+    <div class="col-md-9">
+      <label for="patientFullAddress" class="form-label fw-bold"
+        >Address
+      </label>
+      <p [hidden]="IsLoading">{{ PatientFullAddress }}</p>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+    <div class="col-md-3">
+      <label for="patientHouseholdId" class="form-label fw-bold"
+        >Household ID
+      </label>
+      <p [hidden]="IsLoading">{{ PatientInfo.HouseholdInfo.Id }}</p>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+  </div>
+  <br />
+
+  <!-- PATIENT RECORD -->
+  <h3 class="fw-bold">PATIENT RECORD</h3>
+  <mat-divider></mat-divider>
+  <br />
+  <div class="row g-3">
+    <div class="col-md-4">
+      <label for="patientDisease" class="form-label fw-bold">Disease </label>
+      <p [hidden]="IsLoading">{{ PatientDisease }}</p>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+    <div class="col-md-4">
+      <label for="patientStatus" class="form-label fw-bold">Status </label>
+      <p [hidden]="IsLoading">{{ PatientStatus }}</p>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+    <div class="col-md-4">
+      <label for="patientDateReported" class="form-label fw-bold"
+        >Date Reported
+      </label>
+      <p [hidden]="IsLoading">{{ PatientRecordDateReported }}</p>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+  </div>
+</mat-dialog-content>

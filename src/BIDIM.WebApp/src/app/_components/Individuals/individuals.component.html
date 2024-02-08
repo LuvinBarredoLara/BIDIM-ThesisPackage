@@ -1,0 +1,121 @@
+<div class="container-fluid">
+  <nav class="navbar navbar-expand-lg navbar-light mt-3" id="searchNavbar">
+    <div class="container-fluid">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarToggle"
+        aria-controls="navbarToggle"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse mt-2 mt-lg-0" id="navbarToggle">
+        <span class="navbar-brand mb-0 h1 me-auto" style="font-weight: bolder"
+          >Individual List</span
+        >
+        <form class="d-flex mt-2 mt-lg-0">
+          <input
+            class="form-control me-2"
+            type="text"
+            placeholder="Search..."
+            aria-label="Search"
+            [(ngModel)]="SearchFilter"
+            (keyup)="applyFilter($event)"
+            name="searchFilter"
+          />
+        </form>
+      </div>
+    </div>
+  </nav>
+  <br />
+  <button
+    class="btn btn-warning me-auto mb-3"
+    type="button"
+    style="color: #ffffff; font-weight: bolder"
+    (click)="AddIndividual()"
+  >
+    <i class="bi bi-person-add"></i>
+    ADD NEW INDIVIDUAL
+  </button>
+  <table mat-table [dataSource]="IndividualList" matSort>
+    <ng-container matColumnDef="FullName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Full Name</th>
+      <td mat-cell *matCellDef="let ind">{{ ind.FullName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Gender">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Gender</th>
+      <td mat-cell *matCellDef="let ind">{{ ind.Gender }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="HouseholdFamilyName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Household Name</th>
+      <td mat-cell *matCellDef="let ind">{{ ind.HouseholdFamilyName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Active">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Active</th>
+      <td mat-cell *matCellDef="let ind">{{ ind.IsActive }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Options">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let ind">
+        <button
+          class="btn btn-md btn-info text-white me-3"
+          (click)="ViewIndividual(ind.Id)"
+        >
+          <i class="bi bi-eye-fill"></i>
+        </button>
+        <button
+          class="btn btn-md btn-warning text-white me-3"
+          (click)="EditIndividual(ind.Id)"
+        >
+          <i class="bi bi-pencil-fill"></i>
+        </button>
+        <!-- <button class="btn btn-md btn-danger">
+          <i class="bi bi-trash-fill"></i>
+        </button> -->
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="IndividualColumnHeaders"></tr>
+    <tr
+      mat-row
+      *matRowDef="let indRowData; columns: IndividualColumnHeaders"
+    ></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4" [hidden]="!IsLoading">
+        <ngx-skeleton-loader
+          class="mt-1"
+          count="2"
+          appearance="line"
+          animation="pulse"
+          [theme]="{ height: '40px' }"
+        ></ngx-skeleton-loader>
+      </td>
+      <td
+        class="mat-cell"
+        colspan="4"
+        style="text-align: center"
+        [hidden]="IsLoading"
+      >
+        No data
+        {{
+          SearchFilter.length === 0 ? "" : "matching filters: " + SearchFilter
+        }}
+      </td>
+    </tr>
+  </table>
+  <mat-paginator
+    [pageSize]="10"
+    [hidePageSize]="true"
+    [length]="IndividualList.data.length"
+    [showFirstLastButtons]
+    aria-label="Select page of Individuals"
+  >
+  </mat-paginator>
+</div>

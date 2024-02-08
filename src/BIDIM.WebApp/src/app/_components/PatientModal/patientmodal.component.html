@@ -1,0 +1,490 @@
+<button
+  class="btn btn-light float-end"
+  id="patientModalCloseBtn"
+  (click)="CloseModal()"
+  [disabled]="IsLoading"
+>
+  <i class="bi bi-x-lg"></i>
+</button>
+<h2 mat-dialog-title class="text-center">{{ ModalTitle }}</h2>
+<mat-dialog-content class="mat-typography">
+  <h3 class="fw-bold">PATIENT INFORMATION</h3>
+  <mat-divider></mat-divider>
+  <br />
+  <form class="row g-3" [formGroup]="PatientInfoForm">
+    <div class="col-md-4">
+      <label for="patientId" class="form-label fw-bold">Patient ID</label>
+      <input
+        type="text"
+        class="form-control"
+        id="patientId"
+        [formControl]="PatientInfoControls.PatientId"
+        [hidden]="IsLoading"
+      />
+      <div
+        *ngIf="
+          PatientInfoControls.PatientId.invalid &&
+          (PatientInfoControls.PatientId.dirty ||
+            PatientInfoControls.PatientId.touched ||
+            PatientInfoFormSubmitted)
+        "
+        class="font-weight-bold text-danger text-uppercase"
+      >
+        <div *ngIf="PatientInfoControls.PatientId.errors?.['required']">
+          Required
+        </div>
+      </div>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+    <div class="col-md-4">
+      <label for="patientFirstName" class="form-label fw-bold"
+        >First Name</label
+      >
+      <input
+        type="text"
+        class="form-control"
+        id="patientFirstName"
+        [formControl]="PatientInfoControls.FirstName"
+        [hidden]="IsLoading"
+      />
+      <div
+        *ngIf="
+          PatientInfoControls.FirstName.invalid &&
+          (PatientInfoControls.FirstName.dirty ||
+            PatientInfoControls.FirstName.touched ||
+            PatientInfoFormSubmitted)
+        "
+        class="font-weight-bold text-danger text-uppercase"
+      >
+        <div *ngIf="PatientInfoControls.FirstName.errors?.['required']">
+          Required
+        </div>
+      </div>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+    <div class="col-md-4">
+      <label for="patientLastName" class="form-label fw-bold">Last Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="patientLastName"
+        [formControl]="PatientInfoControls.LastName"
+        [hidden]="IsLoading"
+      />
+      <div
+        *ngIf="
+          PatientInfoControls.LastName.invalid &&
+          (PatientInfoControls.LastName.dirty ||
+            PatientInfoControls.LastName.touched ||
+            PatientInfoFormSubmitted)
+        "
+        class="font-weight-bold text-danger text-uppercase"
+      >
+        <div *ngIf="PatientInfoControls.LastName.errors?.['required']">
+          Required
+        </div>
+      </div>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+    <div class="col-md-4">
+      <label for="patientDoB" class="form-label fw-bold">Date of Birth</label>
+      <div class="input-group" [hidden]="IsLoading">
+        <input
+          type="text"
+          class="form-control"
+          matInput
+          [matDatepicker]="picker"
+          [formControl]="PatientInfoControls.DoB"
+          (dateChange)="CalculateAge($event)"
+          readonly="true"
+        />
+        <button
+          class="btn btn-outline-secondary rounded-end"
+          type="button"
+          id="patientDoBBtn"
+          (click)="picker.open()"
+        >
+          <span class="bi bi-calendar-date"></span>
+        </button>
+        <mat-datepicker #picker touchUi disabled="false"></mat-datepicker>
+      </div>
+      <div
+        *ngIf="
+          PatientInfoControls.DoB.invalid &&
+          (PatientInfoControls.DoB.dirty ||
+            PatientInfoControls.DoB.touched ||
+            PatientInfoFormSubmitted)
+        "
+        class="font-weight-bold text-danger text-uppercase"
+      >
+        <div *ngIf="PatientInfoControls.DoB.errors?.['required']">Required</div>
+      </div>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+    <div class="col-md-2">
+      <label for="patientAge" class="form-label fw-bold">Age</label>
+      <input
+        type="number"
+        min="0"
+        class="form-control"
+        id="patientAge"
+        [formControl]="PatientInfoControls.Age"
+        [hidden]="IsLoading"
+      />
+      <div
+        *ngIf="
+          PatientInfoControls.Age.invalid &&
+          (PatientInfoControls.Age.dirty ||
+            PatientInfoControls.Age.touched ||
+            PatientInfoFormSubmitted)
+        "
+        class="font-weight-bold text-danger text-uppercase"
+      >
+        <div *ngIf="PatientInfoControls.Age.errors?.['required']">Required</div>
+      </div>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+    <div class="col-md-3">
+      <label for="patientSex" class="form-label fw-bold">Sex</label>
+      <select
+        class="form-select"
+        aria-label="Select Sex"
+        [formControl]="PatientInfoControls.Sex"
+        [hidden]="IsLoading"
+      >
+        <option selected value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+    <div class="col-md-3">
+      <label for="patientContactNumber" class="form-label fw-bold"
+        >Contact No.</label
+      >
+      <input
+        type="text"
+        class="form-control"
+        id="patientContactNumber"
+        [formControl]="PatientInfoControls.ContactNumber"
+        [hidden]="IsLoading"
+      />
+      <div
+        *ngIf="
+          PatientInfoControls.ContactNumber.invalid &&
+          (PatientInfoControls.ContactNumber.dirty ||
+            PatientInfoControls.ContactNumber.touched ||
+            PatientInfoFormSubmitted)
+        "
+        class="font-weight-bold text-danger text-uppercase"
+      >
+        <div *ngIf="PatientInfoControls.ContactNumber.errors?.['required']">
+          Required
+        </div>
+      </div>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+    <div class="col-md-4">
+      <label for="patientCityMun" class="form-label fw-bold"
+        >City/Municipality</label
+      >
+      <select
+        class="form-select"
+        aria-label="Select City/Municipality"
+        (change)="FilterBrgyByCityMun($event)"
+        name="patientCityMunSelect"
+        [formControl]="PatientInfoControls.CityMun"
+        [hidden]="IsLoading"
+      >
+        <option selected value="">Please Select</option>
+        <option *ngFor="let cm of CityMuns" value="{{ cm.citymunCode }}">
+          {{ cm.citymunDesc }}
+        </option>
+      </select>
+      <div
+        *ngIf="
+          PatientInfoControls.CityMun.invalid &&
+          (PatientInfoControls.CityMun.dirty ||
+            PatientInfoControls.CityMun.touched ||
+            PatientInfoFormSubmitted)
+        "
+        class="font-weight-bold text-danger text-uppercase"
+      >
+        <div *ngIf="PatientInfoControls.CityMun.errors?.['required']">
+          Required
+        </div>
+      </div>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+    <div class="col-md-6">
+      <label for="patientBrgyAdd" class="form-label fw-bold">Brgy.</label>
+      <select
+        class="form-select"
+        aria-label="Select Brgy."
+        name="patientBrgySelect"
+        [formControl]="PatientInfoControls.Brgy"
+        [hidden]="IsLoading"
+        (change)="UpdateHouseholdCoord()"
+      >
+        <option *ngFor="let b of Brgys" value="{{ b.brgyCode }}">
+          {{ b.brgyDesc }}
+        </option>
+      </select>
+      <div
+        *ngIf="
+          PatientInfoControls.Brgy.invalid &&
+          (PatientInfoControls.Brgy.dirty ||
+            PatientInfoControls.Brgy.touched ||
+            PatientInfoFormSubmitted)
+        "
+        class="font-weight-bold text-danger text-uppercase"
+      >
+        <div *ngIf="PatientInfoControls.Brgy.errors?.['required']">
+          Required
+        </div>
+      </div>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+    <div class="col-md-2">
+      <label for="patientZoneAdd" class="form-label fw-bold">Zone</label>
+      <input
+        type="number"
+        min="0"
+        class="form-control"
+        id="patientZoneAdd"
+        [formControl]="PatientInfoControls.Zone"
+        [hidden]="IsLoading"
+      />
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+    <div class="col-12">
+      <button
+        class="btn btn-primary float-end"
+        name="mappingBtn"
+        (click)="OpenMapping()"
+        [disabled]="IsLoading"
+      >
+        <i class="bi bi-geo-alt"></i> Household Mapping
+      </button>
+    </div>
+    <div class="col-12">
+      <p
+        style="font-weight: bold; text-transform: uppercase"
+        [ngClass]="
+          PatientHouseholdCoordinate.length === 0
+            ? 'text-danger float-end'
+            : 'text-success float-end'
+        "
+      >
+        {{
+          PatientHouseholdCoordinate.length === 0
+            ? "No Household Selected"
+            : "Household Selected"
+        }}
+        <i
+          [ngClass]="
+            PatientHouseholdCoordinate.length === 0
+              ? 'bi bi-exclamation-circle text-danger'
+              : 'bi bi-check-circle text-success'
+          "
+        ></i>
+      </p>
+    </div>
+  </form>
+  <br />
+
+  <!-- PATIENT RECORD -->
+  <h3 class="fw-bold">PATIENT RECORD</h3>
+  <mat-divider></mat-divider>
+  <br />
+  <div class="row g-3">
+    <div class="col-md-4">
+      <label for="patientDisease" class="form-label fw-bold"
+        >Infectious Disease</label
+      >
+      <select
+        class="form-select"
+        aria-label="Select Disease"
+        name="patientDisease"
+        [formControl]="PatientInfoControls.InfectiousDisease"
+        [hidden]="IsLoading"
+      >
+        <option selected value="">Please Select</option>
+        <option *ngFor="let d of Diseases" value="{{ d.Id }}">
+          {{ d.Name }}
+        </option>
+      </select>
+      <div
+        *ngIf="
+          PatientInfoControls.InfectiousDisease.invalid &&
+          (PatientInfoControls.InfectiousDisease.dirty ||
+            PatientInfoControls.InfectiousDisease.touched ||
+            PatientInfoFormSubmitted)
+        "
+        class="font-weight-bold text-danger text-uppercase"
+      >
+        <div *ngIf="PatientInfoControls.InfectiousDisease.errors?.['required']">
+          Required
+        </div>
+      </div>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+    <div class="col-md-4">
+      <label for="patientStatus" class="form-label fw-bold">Status</label>
+      <select
+        class="form-select"
+        aria-label="Select Status"
+        name="patientStatus"
+        [formControl]="PatientInfoControls.Status"
+        [hidden]="IsLoading"
+      >
+        <option selected value="">Please Select</option>
+        <option *ngFor="let s of Statuses" value="{{ s.Id }}">
+          {{ s.Name }}
+        </option>
+      </select>
+      <div
+        *ngIf="
+          PatientInfoControls.Status.invalid &&
+          (PatientInfoControls.Status.dirty ||
+            PatientInfoControls.Status.touched ||
+            PatientInfoFormSubmitted)
+        "
+        class="font-weight-bold text-danger text-uppercase"
+      >
+        <div *ngIf="PatientInfoControls.Status.errors?.['required']">
+          Required
+        </div>
+      </div>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+    <div class="col-md-4">
+      <label for="patientDateReported" class="form-label fw-bold"
+        >Date Reported</label
+      >
+      <div class="input-group" [hidden]="IsLoading">
+        <input
+          type="text"
+          class="form-control"
+          matInput
+          [matDatepicker]="pickerDateReported"
+          [formControl]="PatientInfoControls.DateReported"
+          readonly="true"
+        />
+        <button
+          class="btn btn-outline-secondary rounded-end"
+          type="button"
+          id="patientDateReported"
+          (click)="pickerDateReported.open()"
+        >
+          <span class="bi bi-calendar-date"></span>
+        </button>
+        <mat-datepicker
+          #pickerDateReported
+          touchUi
+          disabled="false"
+        ></mat-datepicker>
+      </div>
+      <div
+        *ngIf="
+          PatientInfoControls.DateReported.invalid &&
+          (PatientInfoControls.DateReported.dirty ||
+            PatientInfoControls.DateReported.touched ||
+            PatientInfoFormSubmitted)
+        "
+        class="font-weight-bold text-danger text-uppercase"
+      >
+        <div *ngIf="PatientInfoControls.DateReported.errors?.['required']">
+          Required
+        </div>
+      </div>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button class="btn btn-success" [disabled]="IsLoading" (click)="Submit$()">
+    {{
+      patientInfoData.PatientGuid !== "00000000-0000-0000-0000-000000000000"
+        ? "Save"
+        : "Create"
+    }}
+  </button>
+</mat-dialog-actions>

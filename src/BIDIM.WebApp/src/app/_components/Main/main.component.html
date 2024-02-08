@@ -1,0 +1,222 @@
+<section>
+  <div class="vh-100">
+    <nav class="navbar" style="background-color: rgb(12, 78, 78)">
+      <div class="container">
+        <div class="mx-auto">
+          <img
+            src="../../../assets/images/header.png"
+            class="headerImg rounded img-fluid"
+            alt="headerImg"
+          />
+        </div>
+      </div>
+    </nav>
+    <mat-sidenav-container class="sideNavContainer">
+      <mat-sidenav
+        opened
+        mode="side"
+        class="sideNav"
+        [fixedInViewport]="true"
+        role="navigation"
+      >
+        <div class="d-flex flex-column flex-shrink-0">
+          <div class="sideNavHeader text-center">
+            <p class="fs-1"><i class="bi bi-person-circle"></i></p>
+            <p class="fs-5">
+              {{
+                UserPrincipal != undefined
+                  ? "Welcome, " + UserPrincipal.Firstname
+                  : ""
+              }}
+            </p>
+            <p class="fs-6">
+              {{ UserPrincipal != undefined ? UserPrincipal.Type : "" }}
+            </p>
+          </div>
+          <span><br /></span>
+          <ul class="nav nav-pills flex-column mb-auto">
+            <li
+              class="nav-item mb-3"
+              data-toggle="tooltip"
+              data-placement="right"
+              title="Dashboard"
+              style="padding-left: 20px"
+              routerLinkActive="active-page"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <a
+                href="javascript:void(0);"
+                class="nav-link"
+                aria-current="page"
+                routerLink="/Dashboard"
+              >
+                <i class="bi bi-menu-button-wide"></i>
+                Dashboard
+              </a>
+            </li>
+            <li
+              class="nav-item mb-3"
+              data-toggle="tooltip"
+              data-placement="right"
+              title="Households"
+              style="padding-left: 20px"
+              routerLinkActive="active-page"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <a
+                href="javascript:void(0);"
+                class="nav-link"
+                aria-current="page"
+                routerLink="/Households"
+              >
+                <i class="bi bi-house-door"></i>
+                Households
+              </a>
+            </li>
+            <li
+              class="nav-item mb-3"
+              data-toggle="tooltip"
+              data-placement="right"
+              title="Population"
+              style="padding-left: 20px"
+              routerLinkActive="active-page"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <a
+                href="javascript:void(0);"
+                class="nav-link"
+                aria-current="page"
+                routerLink="/Population"
+              >
+                <i class="bi bi-people"></i>
+                Population
+              </a>
+            </li>
+            <li
+              class="nav-item mb-3"
+              data-toggle="tooltip"
+              data-placement="right"
+              title="Cases"
+              style="padding-left: 20px"
+              routerLinkActive="active-page"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <a
+                href="javascript:void(0);"
+                class="nav-link"
+                aria-current="page"
+                routerLink="/Cases"
+              >
+                <i class="bi bi-files"></i>
+                Cases
+              </a>
+            </li>
+            <!-- <li
+              class="nav-item mb-3"
+              data-toggle="tooltip"
+              data-placement="right"
+              title="Patients"
+              style="padding-left: 20px"
+              routerLinkActive="active-page"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <a
+                href="javascript:void(0);"
+                class="nav-link"
+                aria-current="page"
+                routerLink="/Patients"
+              >
+                <i class="bi bi-hospital"></i>
+                Patients
+              </a>
+            </li> -->
+            <li
+              class="nav-item mb-3"
+              data-toggle="tooltip"
+              data-placement="right"
+              title="Statistics"
+              style="padding-left: 20px"
+              routerLinkActive="active-page"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <a
+                href="javascript:void(0);"
+                class="nav-link"
+                aria-current="page"
+                routerLink="/Statistics"
+              >
+                <i class="bi bi-graph-up-arrow"></i>
+                Statistics
+              </a>
+            </li>
+            <li
+              class="nav-item mb-3"
+              data-toggle="tooltip"
+              data-placement="right"
+              title="Mapping"
+              style="padding-left: 20px"
+              routerLinkActive="active-page"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <a
+                href="javascript:void(0);"
+                class="nav-link"
+                aria-current="page"
+                routerLink="/Mapping"
+              >
+                <i class="bi bi-pin-map"></i>
+                Mapping
+              </a>
+            </li>
+            <li
+              class="nav-item mb-3"
+              data-toggle="tooltip"
+              data-placement="right"
+              title="Users"
+              style="padding-left: 20px"
+              [hidden]="
+                UserPrincipal.Type !== 'Admin' &&
+                UserPrincipal.Type !== 'SuperAdmin'
+              "
+              routerLinkActive="active-page"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <a
+                href="javascript:void(0);"
+                class="nav-link"
+                aria-current="page"
+                routerLink="/Users"
+              >
+                <i class="bi bi-people"></i>
+                Users
+              </a>
+            </li>
+            <hr />
+            <li
+              class="nav-item mt-3"
+              data-toggle="tooltip"
+              data-placement="right"
+              title="Logout"
+              style="padding-left: 20px"
+              routerLinkActive="active-page"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <a
+                href="javascript:void(0);"
+                class="nav-link"
+                aria-current="page"
+                (click)="Logout()"
+              >
+                <i class="bi bi-box-arrow-right"></i>
+                Logout
+              </a>
+            </li>
+          </ul>
+        </div>
+      </mat-sidenav>
+      <mat-sidenav-content>
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+</section>

@@ -1,0 +1,25 @@
+table {
+  width: 100%;
+  border-radius: 10px;
+  vertical-align: middle;
+}
+
+[class*="mat-column"] {
+  text-align: center;
+}
+
+:host ::ng-deep .mat-sort-header-container {
+  display: flex;
+  justify-content: center;
+}
+
+#patientModalCloseBtn {
+  background-color: #ffffff;
+  border-color: #ffffff;
+}
+
+#patientModalCloseBtn:hover {
+  background-color: gray;
+  border-color: gray;
+  color: #ffffff;
+}

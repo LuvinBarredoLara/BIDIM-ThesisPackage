@@ -1,0 +1,106 @@
+<button
+  class="btn btn-light float-end"
+  id="householdModalViewCloseBtn"
+  [disabled]="IsLoading"
+  mat-dialog-close
+>
+  <i class="bi bi-x-lg"></i>
+</button>
+<h2 mat-dialog-title class="text-center">VIEW HOUSEHOLD</h2>
+<mat-dialog-content class="mat-typography">
+  <h3 class="fw-bold">HOUSEHOLD INFORMATION</h3>
+  <mat-divider></mat-divider>
+  <br />
+  <div class="row g-3">
+    <!-- Family Name -->
+    <div class="col-12">
+      <label class="form-label fw-bold">Family Name</label>
+      <p [hidden]="IsLoading">{{ HouseholdInfo.FamilyName }}</p>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+
+    <!-- City/Mun -->
+    <div class="col-md-6">
+      <label class="form-label fw-bold">City/Municipality</label>
+      <p [hidden]="IsLoading">{{ HouseholdInfo.CityMun }}</p>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+
+    <!-- Brgy. -->
+    <div class="col-md-6">
+      <label class="form-label fw-bold">Brgy.</label>
+      <p [hidden]="IsLoading">{{ HouseholdInfo.Brgy }}</p>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+
+    <!-- Zone -->
+    <div class="col-md-6">
+      <label class="form-label fw-bold">Zone</label>
+      <p [hidden]="IsLoading">{{ HouseholdInfo.Zone }}</p>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+
+    <!-- Street -->
+    <div class="col-md-6">
+      <label class="form-label fw-bold">Street</label>
+      <p [hidden]="IsLoading">{{ HouseholdInfo.Street }}</p>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+
+    <!-- Long -->
+    <div class="col-12">
+      <label class="form-label fw-bold">Longitude</label>
+      <p [hidden]="IsLoading">{{ HouseholdInfo.Long }}</p>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+
+    <!-- Lat -->
+    <div class="col-12">
+      <label class="form-label fw-bold">Latitude</label>
+      <p [hidden]="IsLoading">{{ HouseholdInfo.Lat }}</p>
+      <ngx-skeleton-loader
+        [hidden]="!IsLoading"
+        count="1"
+        appearance="line"
+        animation="pulse"
+        [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+      ></ngx-skeleton-loader>
+    </div>
+  </div>
+</mat-dialog-content>

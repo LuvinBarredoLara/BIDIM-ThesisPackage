@@ -1,0 +1,127 @@
+<div class="loginBg container-fluid">
+  <img
+    class="d-flex mx-auto pt-4 pb-5 img-fluid"
+    src="../../../assets/images/header.png"
+    alt="logo"
+  />
+  <div class="row">
+    <div class="col-12">
+      <div class="d-flex justify-content-center">
+        <div class="card">
+          <img
+            class="mx-auto"
+            src="../../../assets/images/logo_cropped.png"
+            alt="logo"
+          />
+          <h2>Log In</h2>
+          <hr />
+          <form [formGroup]="userLoginForm">
+            <div class="mb-3">
+              <div class="input-group" [hidden]="isLoading">
+                <span class="input-group-text"
+                  ><i class="bi bi-person-fill"></i
+                ></span>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="usernameInput"
+                  aria-describedby="usernameError"
+                  placeholder="Username"
+                  [formControl]="userLoginForm.controls.username"
+                  required
+                />
+              </div>
+              <div
+                *ngIf="
+                  loginFormControls.username.invalid &&
+                  (loginFormControls.username.dirty ||
+                    loginFormControls.username.touched ||
+                    isLoginFormSubmitted)
+                "
+              >
+                <div *ngIf="loginFormControls.username.errors?.['required']">
+                  <div class="form-text">Username is Required</div>
+                </div>
+              </div>
+              <ngx-skeleton-loader
+                [hidden]="!isLoading"
+                count="1"
+                appearance="line"
+                animation="pulse"
+                [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+              ></ngx-skeleton-loader>
+            </div>
+            <div class="mb-3">
+              <div class="input-group" [hidden]="isLoading">
+                <span class="input-group-text"
+                  ><i class="bi bi-lock-fill"></i
+                ></span>
+                <input
+                  type="password"
+                  class="form-control form-control-sm"
+                  id="passwordInput"
+                  placeholder="Password"
+                  [formControl]="userLoginForm.controls.password"
+                  required
+                />
+              </div>
+              <div
+                *ngIf="
+                  loginFormControls.password.invalid &&
+                  (loginFormControls.password.dirty ||
+                    loginFormControls.password.touched ||
+                    isLoginFormSubmitted)
+                "
+              >
+                <div *ngIf="loginFormControls.password.errors?.['required']">
+                  <div class="form-text">Password is Required</div>
+                </div>
+              </div>
+              <ngx-skeleton-loader
+                [hidden]="!isLoading"
+                count="1"
+                appearance="line"
+                animation="pulse"
+                [theme]="{ height: '35px', 'margin-bottom': '-5px' }"
+              ></ngx-skeleton-loader>
+            </div>
+            <div class="mb-3">
+              <div
+                class="form-check form-check-inline"
+                style="text-align: left"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="rememberMeChckbox"
+                  [formControl]="rememberMe"
+                />
+                <label
+                  class="form-check-label"
+                  for="rememberMeChckbox"
+                  style="color: #ffffff"
+                  >Remember me</label
+                >
+              </div>
+              <!-- <a
+                href="javascript:void(0);"
+                id="forgotPWLink"
+                style="text-align: right"
+                >Forgot password?</a
+              > -->
+            </div>
+            <button
+              id="loginFormSubmitBtn"
+              type="submit"
+              class="btn btn-primary form-control mb-5"
+              (click)="DoLogin$()"
+              [disabled]="isLoading"
+            >
+              {{ isLoading ? "Logging In..." : "Log In" }}
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
