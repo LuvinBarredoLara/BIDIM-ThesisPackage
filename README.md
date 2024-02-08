@@ -13,8 +13,11 @@ Specifically, it allows the Barangay Health Workers to record the patient’s da
 Each one of the objectives are successfully implemented.
 
 /config - Contains the configuration files of our system.
+
 /doc - Documents (Manuscript and User Manual).
+
 /src - Contains the the frontend and backend components.
+
 /store-assets - Contains system images/icons.
 
 ## Motivation
