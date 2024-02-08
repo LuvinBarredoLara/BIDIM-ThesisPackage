@@ -1,33 +1,22 @@
 # BIDIM_Thesis
 
-## Synopsis
+## Introduction
 
-At the top of the file there should be a short introduction and/ or overview that explains **what** the project is. This description should match descriptions added for package managers (Gemspec, package.json, etc.)
+Barangay Infectious Diseases Information Management with GIS for Mapping and SIR Model for Prediction is a comprehensive web-based system that is an efficient and responsive tool that enables successful collection, management, and monitoring of patient’s data affected by infectious diseases.
 
-## Code Example
+The system allows the Barangay Health Workers to have significant information on the current status of their barangay’s public health, particularly on infectious diseases to timely react and come up with urgent preventive measures in reversing the outbreaks saving lives and resources.
 
-Show what the library does as concisely as possible, developers should be able to figure out **how** your project solves their problem by looking at the code example. Make sure the API you are showing off is obvious, and that your code is short and concise.
+Specifically, it allows the Barangay Health Workers to record the patient’s data and infectious diseases data. It has a Geographic Information System that allows the Barangay Health Workers to map the occurrence of infectious diseases to evaluate their interaction and analyze their intensity using heat map and has a mechanism that predicts the spread of Covid19, Dengue, and Tuberculosis using the SIR model.
+
+## Folders
+
+Each one of the objectives are successfully implemented.
+
+/config - Contains the configuration files of our system.
+/doc - Documents (Manuscript and User Manual).
+/src - Contains the the frontend and backend components.
+/store-assets - Contains system images/icons.
 
 ## Motivation
 
-A short description of the motivation behind the creation and maintenance of the project. This should explain **why** the project exists.
-
-## Installation
-
-Provide code examples and explanations of how to get the project.
-
-## API Reference
-
-Depending on the size of the project, if it is small and simple enough the reference docs can be added to the README. For medium size to larger projects it is important to at least provide a link to where the API reference docs live.
-
-## Tests
-
-Describe and show how to run the tests with code examples.
-
-## Contributors
-
-Let people know how they can dive into the project, include important links to things like issue trackers, irc, twitter accounts if applicable.
-
-## License
-
-A short snippet describing the license (MIT, Apache, etc.)
+The creation and maintenance of a thesis are driven by the desire to contribute to knowledge, demonstrate subject mastery, develop essential skills, fulfill academic requirements, influence future opportunities, achieve personal satisfaction, serve as a public record, and enable peer review and recognition. Essentially, a thesis is a comprehensive academic endeavor that fosters knowledge advancement, skill development, and personal and professional growth.
